@@ -43,8 +43,9 @@ public class GenerateDependenciesLicenseInfoMojo extends AbstractMojo {
 	@Component
 	protected ProjectBuilder projectBuilder;
 
-//	@Parameter(property = "localRepository", required = true, readonly = true)
-//	protected ArtifactRepository localRepository;
+	// @Parameter(property = "localRepository", required = true, readonly =
+	// true)
+	// protected ArtifactRepository localRepository;
 
 	@Component
 	private BuildContext buildContext;
@@ -72,6 +73,7 @@ public class GenerateDependenciesLicenseInfoMojo extends AbstractMojo {
 	}
 
 	private void generateDependenciesLicenseInfo() throws ProjectBuildingException {
+		Artifacts2LicensesRepository repo = new Artifacts2LicensesRepository();
 
 		ProjectBuildingRequest request = new DefaultProjectBuildingRequest(session.getProjectBuildingRequest());
 		// Build the project and get the result
@@ -79,8 +81,9 @@ public class GenerateDependenciesLicenseInfoMojo extends AbstractMojo {
 		List<Artifact> runtimeArtifacts = mavenProject.getRuntimeArtifacts();
 		for (Artifact artifact : runtimeArtifacts) {
 			MavenProject project = projectBuilder.build(artifact, request).getProject();
-			List licenses = project.getLicenses();
+			List<String> licenses = project.getLicenses();
 			log.info("licenses = {}", licenses);
+			repo.add(artifact, project.getLicenses());
 		}
 
 	}
