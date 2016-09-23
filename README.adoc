@@ -1,0 +1,13 @@
+:toc: macro
+
+image:https://travis-ci.org/fmarot/simple-licenses-maven.svg?branch=master["Build Status", link="https://travis-ci.org/fmarot/nativedependencies-maven"]
+
+toc::[]
+
+= What is simple-licenses-maven-plugin ?
+
+TODO
+
+= License
+
+Apache License 2.0 
